@@ -15,7 +15,7 @@ class Patient(Base):
     date_of_birth = Column(Date, nullable=False)
     sex = Column(String(50), nullable=False)
     blood_type = Column(String(3), nullable=False)
-    visits: Mapped[List["HospitalVisit"]] = relationship("HospitalVisit", back_populates="patient")
+    # visits: Mapped[List["HospitalVisit"]] = relationship("HospitalVisit", back_populates="patient")
 
     @validates('sex')
     def validate_sex(self, key, sex):
@@ -31,9 +31,9 @@ class Patient(Base):
             raise ValueError(f"Invalid blood type: {blood_type}")
         return blood_type
 
-class HospitalVisit(Base):
-    visit_id = Column(Integer, primary_key=True)
-    visit_cause = Column(Text)
-    visit_date = Column(Date, nullable=False)
-    patient: Mapped["Patient"] = relationship(back_populates="visits")
-    patient_id: Column(Integer, ForeignKey('patients.patient_id'))
+# class HospitalVisit(Base):
+#     visit_id = Column(Integer, primary_key=True)
+#     visit_cause = Column(Text)
+#     visit_date = Column(Date, nullable=False)
+#     patient: Mapped["Patient"] = relationship(back_populates="visits")
+#     patient_id: Column(Integer, ForeignKey('patients.patient_id'))
