@@ -23,6 +23,7 @@ def update_patient(patient_id: UUID, patient: Patient):
             return patient
     raise HTTPException(status_code=404, detail=f"Patient {patient_id} does not exist.")
 
+@app.delete("/{patient_id}")
 def delete_patient(patient_id: UUID, patient: Patient):
     for i, p in enumerate(patients):
         if(patient.id == p.id):
