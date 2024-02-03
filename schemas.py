@@ -20,11 +20,11 @@ class Patient(BaseModel):
     middle_name: Optional[str] = Field(None, max_length=100)
     last_name: str = Field(max_length=100)
     date_of_birth: date
-    sex: str = Field(max_length=5)
-    blood_type: str = Field(max_length=3)
+    sex: str
+    blood_type: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
     
     _validate_sex = validator('sex', allow_reuse=True)(validate_sex)
     _validate_blood_type = validator('blood_type', allow_reuse=True)(validate_blood_type)
@@ -34,8 +34,8 @@ class PatientCreate(BaseModel):
     middle_name: Optional[str] = Field(None, max_length=100)
     last_name: str = Field(max_length=100)
     date_of_birth: date
-    sex: str = Field(max_length=5)
-    blood_type: str = Field(max_length=3)
+    sex: str
+    blood_type: str
 
     _validate_sex = validator('sex', allow_reuse=True)(validate_sex)
     _validate_blood_type = validator('blood_type', allow_reuse=True)(validate_blood_type)

@@ -45,6 +45,11 @@ def get_patient(patient_id: int, db: Session = Depends(get_session)):
         raise HTTPException(status_code = 404, detail = f"Patient with id {id} not found!")
     return db_patient
 
+@app.get("/patients/", response_model = List[schemas.Patient])
+def get_all_patients(db = Depends(get_session)):
+    db_patients = db.query(models.Patient).all()
+    return db_patients
+
 @app.delete("/patients/{patient_id}", response_model = schemas.Patient)
 def delete_patient(patient_id: int, db: Session = Depends(get_session)):
     db_patient = db.query(models.Patient).get(patient_id)

@@ -1,10 +1,8 @@
 from sqlalchemy import Column, Integer, String, Date, ForeignKey, Text
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, validates
 from sqlalchemy.orm import Mapped
 from typing import List
-
-Base = declarative_base()
+from database import Base
 
 class Patient(Base):
     __tablename__ = 'patients'
