@@ -2,13 +2,13 @@ from pydantic import BaseModel, Field, validator
 from typing import List, Optional
 from datetime import date
 
-def validate_sex(cls, sex):
+def validate_sex(sex):
     valid_sexes = ['Male', 'Female', 'Other']
     if sex not in valid_sexes:
         raise ValueError(f"Invalid sex: {sex}")
     return sex
 
-def validate_blood_type(cls, blood_type):
+def validate_blood_type(blood_type):
     valid_types = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
     if blood_type not in valid_types:
         raise ValueError(f"Invalid blood type: {blood_type}")
@@ -50,11 +50,3 @@ class PatientUpdate(BaseModel):
 
     _validate_sex = validator('sex', allow_reuse=True)(validate_sex)
     _validate_blood_type = validator('blood_type', allow_reuse=True)(validate_blood_type)
-
-class PatientGet(BaseModel):
-    first_name: str
-    middle_name: Optional[str]
-    last_name: str
-    date_of_birth: date
-    sex: str
-    blood_type: str
