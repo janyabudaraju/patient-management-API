@@ -45,3 +45,13 @@ async def get_patient(patient_id: int, db: Session = Depends(get_session)):
         raise HTTPException(status_code = 404, detail = f"Patient with id {id} not found!")
     return db_patient
 
+
+
+@app.delete("/patients/{patient_id}")
+async def delete_todo(patient_id: int, db: Session = Depends(get_session)):
+    db_patient = db.query(models.Patient).get(patient_id)
+    if not db_patient:
+        raise HTTPException(status_code = 404, detail = f"Patient with id {id} not found!")
+    db.delete(db_patient)
+    db.commit()
+    return db_patient
