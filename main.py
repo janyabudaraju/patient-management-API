@@ -50,14 +50,14 @@ def get_all_patients(db = Depends(get_session)):
     db_patients = db.query(models.Patient).all()
     return db_patients
 
-@app.delete("/patients/{patient_id}", response_model = schemas.Patient)
+@app.delete("/patients/{patient_id}", response_model = schemas.Patient, status_code=status.HTTP_204_NO_CONTENT)
 def delete_patient(patient_id: int, db: Session = Depends(get_session)):
     db_patient = db.query(models.Patient).get(patient_id)
     if not db_patient:
         raise HTTPException(status_code = 404, detail = f"Patient with id {patient_id} not found!")
     db.delete(db_patient)
     db.commit()
-    return db_patient
+    return None
 
 @app.put("/patients/{patient_id}", response_model=schemas.Patient)
 def update_patient(patient_id: int, updated: schemas.PatientUpdate, db: Session = Depends(get_session)):
