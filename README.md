@@ -11,6 +11,7 @@ This REST API prototype provides functionality to engage with a patient database
 
 ## building & running
 * Ensure that Python 3.8 or newer is installed.
+* Clone this repository and navigate into the project directory.
 * To install the required packages, run `pip3 install fastapi sqlalchemy uvicorn` in your Python environment.
 * Run the application by executing the following command on the command line: `uvicorn main:app`.
   * The API server will be hosted locally at the port number specified in the command output (e.g. `http://127.0.0.1:8000`).
